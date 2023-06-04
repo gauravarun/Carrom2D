@@ -1,0 +1,46 @@
+Carrom is a tabletop game that is popular in many parts of the world. The game is played on a square wooden board with four pockets situated at the corners. The objective of the game is to use a striker to pocket all the carrom pieces before your opponent.
+
+
+Striker -
+
+1. The script begins by declaring variables and setting up references to components such as the Rigidbody2D and LineRenderer.
+2. In the Update() method, the script determines the direction of the Striker based on the mouse position. It also allows the player to set the initial position of the Striker by clicking the left mouse button.
+3. If the position of the Striker is set and its velocity is zero, the LineRenderer is used to visualize the aiming direction.
+4. The script detects when the left mouse button is pressed and sets the positionIsSet flag to true.
+5. The StrikerReset() method resets the Striker's velocity, sets the hasStriked flag to false, and resets the positionIsSet flag.
+6. The ShootStriker() method applies a force to the Striker in the direction determined by the player's input.
+7. In the FixedUpdate() method, if the Space key is held down and the Striker's velocity is zero, the ShootStriker() method is called.
+8. If the Striker's velocity becomes very low (less than 0.2f) and is not zero, the StrikerReset() method is called to reset the Striker's state.
+
+To play the carrom game with this script, follow these steps:
+1. Position the Striker by moving the mouse cursor within the allowed range.
+2. Click the left mouse button to set the position of the Striker.
+3. Hold down the Space key to adjust the power of the shot.
+4. Release the Space key to shoot the Striker in the chosen direction with the desired power.
+5. Observe the Striker's movement and interactions with other game objects.
+
+Game Manager - 
+
+1. The GameManager script is responsible for handling game-related functionalities and serves as a central manager for the game.
+2. It uses a singleton pattern to ensure there is only one instance of the GameManager in the game.
+3. The GameManager script includes references to important game objects and variables, such as the collectedPosition (a Transform representing the position where collected coins are placed), the number of coins collected, and the base striker force.
+4. The CoinCollected() method is called when a coin is collected in the game. It sets the collected coin's collider to be a trigger, stops its velocity, and positions it near the collectedPosition.
+5. The CalculateStrikerForce() method calculates and returns the striker's force based on the fill amount of the powerIndicator in the UIManager.
+6. The GameManager script depends on the Striker script (not provided) and references it through the striker variable.
+
+Overall, the GameManager script manages coin collection, positioning of collected coins, and the calculation of the striker's force. It acts as a central hub for game-related functionality and helps coordinate different elements of the carrom game.
+
+UI Manager -
+
+1. The UIManager script manages the UI elements and functionality in the carrom game.
+2. It uses a singleton pattern to ensure there is only one instance of the UIManager in the game.
+3. The UIManager script includes a reference to the powerIndicator, which is an Image component representing the power level indicator in the game UI.
+4. The Update() method is responsible for updating the UI elements.
+5. Inside the Update() method, the powerIndicator's fill amount is adjusted based on the distance between the striker's position and the mouse position on the screen.
+   - This calculation allows the powerIndicator to reflect the distance the player has dragged the mouse, which can correspond to the power of the striker shot.
+   - The factor variable determines the scaling factor for the fill amount calculation.
+6. Note that there are commented out sections that suggest using keyboard inputs (UpArrow and DownArrow) to increase or decrease the power of the striker. These sections are currently disabled.
+
+Overall, the UIManager script updates the powerIndicator based on the position of the striker and the mouse cursor. It provides visual feedback to the player about the selected power level for the striker shot.
+
+
